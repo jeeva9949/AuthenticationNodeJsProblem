@@ -103,7 +103,7 @@ app.put('/change-password', async (request, response) => {
       } 
       else {
         const hasedpassword = await bcrypt.hash(newPassword, 10)
-        const updatepasswordquery = `UPDATE user SET username = '${username}' ,password = '${hasedpassword}'`;
+        const updatepasswordquery = `UPDATE user SET password = '${hasedpassword}' WHERE username = '${username}'`
         await db.run(updatepasswordquery)
         response.status(200)
         response.send('Password updated')
